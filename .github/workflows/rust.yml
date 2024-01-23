@@ -27,7 +27,7 @@ jobs:
           for project in "${projects[@]}"; do
             echo "---=== Building project: $project ===---"
             cd $project
-            cargo build
+            [ ! -f ./.no_CI_build ] && cargo build
             cd -
             echo "---=== Finished building project: $project ===---"
           done
@@ -41,7 +41,7 @@ jobs:
               echo "Running set-test-perms.sh"
               ./set-test-perms.sh
             fi
-            cargo test
+            [ ! -f ./.no_CI_test ] && cargo test
             cd -
             echo "---=== Finished testing project: $project ===---"
           done
