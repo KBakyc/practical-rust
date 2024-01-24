@@ -14,9 +14,10 @@
                 <property name="homogeneous">1</property>
                 <child>
                   <object class="GtkLabel" id="message_input_bo">
-                    <property name="label" translatable="1">
-                        What does the cat say:
-                    </property>
+                    <property name="label" translatable="1">What does the cat say:</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 18"/>
+                    </attributes>
                   </object>
                 </child>
                 <child>
@@ -31,9 +32,10 @@
                 <property name="homogeneous">1</property>
                 <child>
                   <object class="GtkLabel" id="is_dead_switch_label">
-                    <property name="label" translatable="1">
-                        Dead?
-                    </property>
+                    <property name="label" translatable="1">Dead?</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 18"/>
+                    </attributes>
                   </object>
                 </child>
                 <child>
@@ -45,9 +47,7 @@
             </child>
             <child>
               <object class="GtkButton" id="generate_btn">
-                <property name="label" translatable="1">
-		Generate		
-		</property>
+                <property name="label" translatable="1">Generate</property>
                 <property name="focusable">1</property>
                 <property name="receives_default">1</property>
               </object>
@@ -63,12 +63,14 @@
             <child>
               <object class="GtkLabel" id="message_output">
                 <property name="ellipsize">end</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans 18"/>
+                </attributes>
               </object>
             </child>
             <child>
-              <object class="GtkImage" id="image_output">
+              <object class="GtkPicture" id="image_output">
                 <property name="visible">0</property>
-                <property name="file">1x1.png</property>
               </object>
             </child>
           </object>
