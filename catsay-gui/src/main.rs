@@ -15,11 +15,14 @@ fn main() {
             .application(app)
             .title("Catsay")
             .default_width(512)
-            .default_height(552)
+            // .default_height(552)
             .build();
 
         let layout_box = GtkBox::builder().orientation(Orientation::Vertical).build();
-        let label = Label::builder().label("Meow!\n \\\n \\").build();
+
+        // let label = Label::builder().label("Meow!\n \\\n \\").build();
+        let label = Label::new(None);
+        label.set_markup("<span font='24'>Meow!\n \\\n \\</span>");
         layout_box.append(&label);
 
         let file = gio::File::for_path("./images/cat.jpg");
