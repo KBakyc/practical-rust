@@ -1,12 +1,11 @@
 use gtk::prelude::*;
+use gtk4 as gtk;
 
 fn build_ui(app: &gtk::Application) {
     let glade_src = include_str!("layout.glade");
     let builder = gtk::Builder::from_string(glade_src);
     let window: gtk::Window = builder.object("applicationwindow1").unwrap();
     window.set_application(Some(app));
-    // Center the window
-    window.set_position(gtk::WindowPosition::CenterAlways);
     // Inputs
     let message_input: gtk::Entry = builder.object("message_input").unwrap();
     // Submit button
@@ -26,22 +25,15 @@ fn build_ui(app: &gtk::Application) {
             message_input.text().as_str()
         ));
 
-        // for release build set path to images in folder
-        let img_path = if cfg!(debug_assertions) {
-            String::new()
-        } else {
-            String::from("images/")
-        };
-
         if is_dead_switch.is_active() {
-            image_output_clone.set_from_file(Some(img_path + "cat_zombie_512x512.jpg"))
+            image_output_clone.set_from_file(Some("images/cat_zombie_512x512.jpg"))
         } else {
-            image_output_clone.set_from_file(Some(img_path + "cat_512x512.jpg"))
+            image_output_clone.set_from_file(Some("images/cat_512x512.jpg"))
         }
         image_output_clone.show();
     });
 
-    window.show_all();
+    window.show();
     image_output.hide();
 }
 

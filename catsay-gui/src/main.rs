@@ -1,26 +1,37 @@
-use gtk::gdk_pixbuf::Pixbuf;
-use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Box as GtkBox, Label, Orientation, WindowPosition};
+use gtk::gdk::Texture;
+use gtk::gio::{self, ApplicationFlags};
+use gtk::{prelude::*, Picture};
+use gtk::{Application, ApplicationWindow, Box as GtkBox, Label, Orientation};
+use gtk4 as gtk;
+
 fn main() {
-    let app = Application::new(Some("com.shinglyu.catsay-gui"), Default::default());
-    app.connect_activate(|app| {
-        let window = ApplicationWindow::new(app);
-        window.set_title("Catsay");
-        window.set_default_size(480, 480);
-        window.set_position(WindowPosition::Center);
+    let application = Application::new(
+        Some("com.shinglyu.catsay-gui"),
+        ApplicationFlags::FLAGS_NONE,
+    );
 
-        let layout_box = GtkBox::new(Orientation::Vertical, 0);
-        let label = Label::new(Some("Meow!\n \\\n \\"));
-        layout_box.add(&label);
+    application.connect_activate(|app| {
+        let window = ApplicationWindow::builder()
+            .application(app)
+            .title("Catsay")
+            .default_width(512)
+            .default_height(552)
+            .build();
 
-        // let cat_image = Image::from_file("./images/cat.jpg");
-        let pixbuf = Pixbuf::from_file_at_scale("./images/cat.jpg", 480, 480, true).unwrap();
-        let cat_image = gtk::Image::from_pixbuf(Some(&pixbuf));
+        let layout_box = GtkBox::builder().orientation(Orientation::Vertical).build();
+        let label = Label::builder().label("Meow!\n \\\n \\").build();
+        layout_box.append(&label);
 
-        layout_box.add(&cat_image);
-        window.add(&layout_box);
+        let file = gio::File::for_path("./images/cat.jpg");
+        let texture = Texture::from_file(&file).unwrap();
+        let cat_image = Picture::new();
+        cat_image.set_paintable(Some(&texture));
+        cat_image.set_keep_aspect_ratio(true);
+        layout_box.append(&cat_image);
 
-        window.show_all();
+        window.set_child(Some(&layout_box));
+        window.show();
     });
-    app.run();
+
+    application.run();
 }
