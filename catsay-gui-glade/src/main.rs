@@ -18,7 +18,7 @@ fn build_ui(app: &gtk::Application) {
     // Submit button
     let button: gtk::Button = builder.object("generate_btn").unwrap();
     let button_label = gtk::Label::new(Some("Generate"));
-    button_label.set_markup("<span font='18'>Generate</span>");
+    button_label.set_markup("<span font='16'>Generate</span>");
     button.set_child(Some(&button_label));
     // Outputs
     let message_output: gtk::Label = builder.object("message_output").unwrap();
@@ -31,7 +31,7 @@ fn build_ui(app: &gtk::Application) {
 
     button.connect_clicked(move |_| {
         message_output.set_markup(&format!(
-            "<span font='24'>{}</span>\n     \\\n      \\",
+            "<span font='16'>{}</span>\n     \\\n      \\",
             message_input.text().as_str()
         ));
 
@@ -42,6 +42,8 @@ fn build_ui(app: &gtk::Application) {
         };
         let texture = Texture::from_file(&gio::File::for_path(file)).unwrap();
         image_output_clone.set_paintable(Some(&texture));
+        // Set the size request for the image widget
+        image_output_clone.set_size_request(texture.width(), texture.height());
         image_output_clone.show();
     });
 

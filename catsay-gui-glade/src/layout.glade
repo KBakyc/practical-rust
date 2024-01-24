@@ -16,7 +16,7 @@
                   <object class="GtkLabel" id="message_input_bo">
                     <property name="label" translatable="1">What does the cat say:</property>
                     <attributes>
-                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="font-desc" value="Sans 16"/>
                     </attributes>
                   </object>
                 </child>
@@ -34,7 +34,7 @@
                   <object class="GtkLabel" id="is_dead_switch_label">
                     <property name="label" translatable="1">Dead?</property>
                     <attributes>
-                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="font-desc" value="Sans 16"/>
                     </attributes>
                   </object>
                 </child>
@@ -64,7 +64,7 @@
               <object class="GtkLabel" id="message_output">
                 <property name="ellipsize">end</property>
                 <attributes>
-                  <attribute name="font-desc" value="Sans 18"/>
+                  <attribute name="font-desc" value="Sans 16"/>
                 </attributes>
               </object>
             </child>
